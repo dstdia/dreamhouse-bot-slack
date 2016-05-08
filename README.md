@@ -1,4 +1,6 @@
-# Salesforce-Powered Slack Bot for DreamHouse Sample App
+# Slack Bot for the DreamHouse Sample App
+
+A Salesforce-Powered Slack Bot for the DreamHouse Sample Application.
 
 Follow the instructions below to create your own instance of the bot:
 
