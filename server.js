@@ -77,6 +77,18 @@ controller.hears(['(.*) bedrooms'], 'direct_message,direct_mention,mention', (bo
         .catch(error => bot.reply(message, error));
 });
 
+controller.hears(['price changes'], 'direct_message,direct_mention,mention', (bot, message) => {
+    salesforce.findPriceChanges()
+        .then(priceChanges => {
+            bot.reply(message, {
+                text: "Here are the recent price changes:",
+                attachments: formatter.formatPriceChanges(priceChanges)
+            })
+        })
+        .catch(error => bot.reply(message, error));
+});
+
+
 controller.hears(['create case', 'new case'], 'direct_message,direct_mention,mention', (bot, message) => {
 
     let askSubject = (response, convo) => {
