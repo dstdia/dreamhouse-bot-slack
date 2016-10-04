@@ -27,7 +27,7 @@ controller.hears(['help'], 'direct_message,direct_mention,mention', (bot, messag
     "Create Case"`
     });
 });
--
+
 controller.hears(['(.*) bedrooms in (.*) between (.*) and (.*)', '(.*) bedrooms in (.*) from (.*) to (.*)'], 'direct_message,direct_mention,mention', (bot, message) => {
     salesforce.findProperties({bedrooms: match[1], city: match[2], priceMin: match[3], priceMax: match[4]})
         .then(properties => bot.reply(message, {
