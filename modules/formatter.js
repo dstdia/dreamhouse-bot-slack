@@ -30,10 +30,10 @@ exports.formatPriceChanges = priceChanges => {
         priceChanges.forEach(priceChange => {
             let property = priceChange.get("Parent");
             let fields = [];
-            fields.push({title: "Address", value: `${property.Address__c}, ${property.City__c} ${property.State__c}`, short:true});
-            fields.push({title: "Link", value: "https://login.salesforce.com/" + property.Id, short:true});
+            fields.push({title: "Address", value: `${property.Address__c}, ${property.City__c} ${property.State__c}`, short:false});
             fields.push({title: "Old Price", value: `${numeral(priceChange.get("OldValue")).format('$0,0')}`, short:true});
             fields.push({title: "New Price", value: `${numeral(priceChange.get("NewValue")).format('$0,0')}`, short:true});
+            fields.push({title: "Open in Salesforce", value: "https://login.salesforce.com/" + property.Id, short:false});
             attachments.push({color: color, fields: fields});
         });
         return attachments;
