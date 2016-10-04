@@ -1,5 +1,7 @@
 "use strict";
 
+let http = require('http');
+
 let numeral = require("numeral");
 
 let color = "#84BF41";
@@ -42,3 +44,9 @@ exports.formatPriceChanges = priceChanges => {
     }
 
 };
+
+// To keep Heroku awake
+http.createServer(function(request, response) {
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('Ok, dyno is awake.');
+}).listen(process.env.PORT || 5000);
