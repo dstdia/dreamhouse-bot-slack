@@ -14,7 +14,7 @@ exports.formatProperties = properties => {
             fields.push({title: "Price", value: `${numeral(property.get("Price__c")).format('$0,0')}`, short:true});
             fields.push({title: "Bedrooms", value: property.get("Beds__c"), short:true});
             fields.push({title: "Bathrooms", value: property.get("Baths__c"), short:true});
-            fields.push({title: "Open in Salesforce", value: "https://login.salesforce.com/" + property.getId(), short:true});
+            fields.push({title: "Open in Salesforce", value: "https://login.salesforce.com/" + property.getId(), short:false});
             attachments.push({color: color, fields: fields});
         });
         return attachments;
