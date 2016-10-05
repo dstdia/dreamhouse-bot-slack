@@ -109,7 +109,7 @@ controller.hears(['create case', 'new case'], 'direct_message,direct_mention,men
                 .then(_case => {
                     bot.reply(message, {
                         text: "I created the case:",
-                        //attachments: formatter.formatCase(_case)
+                        attachments: formatter.formatCase(_case)
                     });
                     convo.next();
                 })
