@@ -3,10 +3,11 @@
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
 
 let Botkit = require('botkit'),
+    http = require('http'),
     formatter = require('./modules/formatter'),
     salesforce = require('./modules/salesforce'),
 
-    controller = Botkit.slackbot(),
+controller = Botkit.slackbot(),
 
     bot = controller.spawn({
         token: SLACK_BOT_TOKEN

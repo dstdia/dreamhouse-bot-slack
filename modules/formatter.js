@@ -1,7 +1,5 @@
 "use strict";
 
-let http = require('http');
-
 let numeral = require("numeral");
 
 let color = "#84BF41";
