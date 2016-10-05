@@ -7,7 +7,7 @@ let Botkit = require('botkit'),
     formatter = require('./modules/formatter'),
     salesforce = require('./modules/salesforce'),
 
-controller = Botkit.slackbot(),
+    controller = Botkit.slackbot(),
 
     bot = controller.spawn({
         token: SLACK_BOT_TOKEN
@@ -66,10 +66,8 @@ controller.hears(['between (.*) and (.*)', 'from (.*) to (.*)'], 'direct_message
 });
 
 controller.hears(['(.*) bedrooms'], 'direct_message,direct_mention,mention', (bot, message) => {
-    console.log(match[1]);
     salesforce.findProperties({bedrooms: match[1]})
         .then(properties => {
-            console.log(properties);
             bot.reply(message, {
                 text: "I found these properties:",
                 attachments: formatter.formatProperties(properties)
