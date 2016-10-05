@@ -45,8 +45,8 @@ exports.formatPriceChanges = priceChanges => {
 
 exports.formatCase = _case => {
     let fields = [];
-    fields.push({title: "Subject", value: _case.get("subject"), short: true});
-    fields.push({title: "Link", value: 'https://login.salesforce.com/' + _case.get("id"), short: true});
+    fields.push({title: "Subject", value: _case.get("subject"), short: false});
     fields.push({title: "Description", value: _case.get("description"), short: false});
+    fields.push({title: "Open in Salesforce", value: 'https://login.salesforce.com/' + _case.get("id"), short: false});
     return [{color: color, fields: fields}];
 };
