@@ -107,6 +107,7 @@ controller.hears(['create case', 'new case'], 'direct_message,direct_mention,men
             let responses = convo.getResponsesAsArray();
             salesforce.createCase({subject: responses[0].answer, description: responses[1].answer})
                 .then(_case => {
+                    console.log(_case);
                     bot.reply(message, {
                         text: "I created the case:",
                         attachments: formatter.formatCase(_case)
@@ -125,3 +126,9 @@ controller.hears(['create case', 'new case'], 'direct_message,direct_mention,men
     bot.startConversation(message, askSubject);
 
 });
+
+// To keep Heroku awake
+http.createServer(function(request, response) {
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('Ok, dyno is awake.');
+}).listen(process.env.PORT || 5000);

@@ -45,8 +45,10 @@ exports.formatPriceChanges = priceChanges => {
 
 };
 
-// To keep Heroku awake
-http.createServer(function(request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end('Ok, dyno is awake.');
-}).listen(process.env.PORT || 5000);
+exports.formatCase = _case => {
+    let fields = [];
+    fields.push({title: "Subject", value: _case.get("subject"), short: true});
+    fields.push({title: "Link", value: 'https://login.salesforce.com/' + _case.get("id"), short: true});
+    fields.push({title: "Description", value: _case.get("description"), short: false});
+    return [{color: color, fields: fields}];
+};
