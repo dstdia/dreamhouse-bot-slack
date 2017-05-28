@@ -115,6 +115,27 @@ let createCase = newCase => {
 
 };
 
+let createAccount = newAccount => {
+
+    return new Promise((resolve, reject) => {
+        let c = nforce.createSObject('Account');
+        c.set('name', newCase.name);
+        c.set('billingstreet', newCase.billingstreet);
+        c.set('billingpostalcode',newCase.billingpostalcode);
+        c.set('billingcity', newCase.billingcity);
+
+        org.insert({sobject: c}, err => {
+            if (err) {
+                console.error(err);
+                reject("An error occurred while creating the account.");
+            } else {
+                resolve(c);
+            }
+        });
+    });
+
+};
+
 login();
 
 exports.org = org;
