@@ -50,3 +50,13 @@ exports.formatCase = _case => {
     fields.push({title: "Open in Salesforce", value: 'https://login.salesforce.com/' + _case.get("id"), short: false});
     return [{color: color, fields: fields}];
 };
+
+exports.formatAccount = _account => {
+    let fields = [];
+    fields.push({title: "Name", value: _account.get("name"), short: false});
+    fields.push({title: "Adresse", value: _account.get("billingstreet"), short: false});
+    fields.push({title: "Postleitzahl", value: _account.get("billingpostalcode"), short: false});
+    fields.push({title: "Stadt", value: _account.get("billingcity"), short: false});
+    fields.push({title: "Open in Salesforce", value: 'https://login.salesforce.com/' + _account.get("id"), short: false});
+    return [{color: color, fields: fields}];
+};

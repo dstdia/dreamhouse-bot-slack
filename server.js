@@ -126,6 +126,62 @@ controller.hears(['create case', 'new case'], 'direct_message,direct_mention,men
 
 });
 
+controller.hears(['neuer sponsor', 'sponsor anlegen'], 'direct_message,direct_mention,mention', (bot, message) => {
+
+    let askAccountName = (response, convo) => {
+
+        convo.ask("Wie heißt der neue Sponsor?", (response, convo) => {
+            askBillingStreet(response, convo);
+            convo.next();
+        });
+
+    };
+
+    let askBillingStreet = (response, convo) => {
+
+        convo.ask("Wie ist die Straße und Hausnummer?", (response, convo) => {
+            askBillingPostalCode(response, convo);
+            convo.next();
+        });
+
+    };
+
+    let askBillingPostalCode = (response, convo) => {
+
+        convo.ask("Wie lautet die Postleitzahl?", (response, convo) => {
+            askBillingCity(response, convo);
+            convo.next();
+        });
+
+    };
+
+    let askBillingCity = (response, convo) => {
+
+        convo.ask('Und nun noch die Stadt, bitte.', (response, convo) => {
+            console.log("###convo");
+            let responses = convo.getResponsesAsArray();
+            salesforce.createAccount({name: responses[0].answer, billingstreet: responses[1].answer, billingpostalcode: responses[2].answer, billingcity: responses[3].answer})
+                .then(_account => {
+                    console.log(_account);
+                    bot.reply(message, {
+                        text: "Ich habe den Account angelegt",
+                        attachments: formatter.formatAccount(_account)
+                    });
+                    convo.next();
+                })
+                .catch(error => {
+                    bot.reply(message, error);
+                    convo.next();
+                });
+        });
+
+    };
+
+    bot.reply(message, "OK, ich stelle Dir ein paar Fragen dazu!");
+    bot.startConversation(message, askSubject);
+
+});
+
 // To keep Heroku awake
 http.createServer(function(request, response) {
     response.writeHead(200, {'Content-Type': 'text/plain'});
