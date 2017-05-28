@@ -178,7 +178,7 @@ controller.hears(['neuer sponsor', 'sponsor anlegen'], 'direct_message,direct_me
     };
 
     bot.reply(message, "OK, ich stelle Dir ein paar Fragen dazu!");
-    bot.startConversation(message, askSubject);
+    bot.startConversation(message, askAccountName);
 
 });
 
